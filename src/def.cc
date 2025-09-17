@@ -1,11 +1,6 @@
 // Llamamos las librerias y funciones declaradas para definirlas
 #include "header.h"
 
-void CargarInventario(){
-
-
-}
-
 void AgregarProductos()
 {
     std::system("cls");
@@ -14,7 +9,7 @@ void AgregarProductos()
     int n_producto;
     // Abrimos y creamos el archivo
     std::ofstream archivo("Inventario.txt", std::ios::app);
-//Procedemos a preguntar por lo que deseara agregar el usuario
+    // Procedemos a preguntar por lo que deseara agregar el usuario
     std::cout << "Cuantos productos desea agregar?" << std::endl;
     std::cin >> n_producto;
     for (int i = 0; i < n_producto; i++)
@@ -26,7 +21,7 @@ void AgregarProductos()
         std::cout << "Cual es la cantidad del producto que entra?" << std::endl;
         std::cout << "----------------------------------------------" << std::endl;
         std::cin >> p.cantidad_producto;
-        std::cout << "Cuaol es el precio de el producto?" << std::endl;
+        std::cout << "Cual es el precio de el producto?" << std::endl;
         std::cout << "----------------------------------------------" << std::endl;
         std::cin >> p.precio_producto;
         std::system("cls");
@@ -42,27 +37,36 @@ void AgregarProductos()
     }
 }
 
-void MostrarProductos()
+// cargamos el inventario siempre
+void CargarInventario()
 {
-    Producto p;
-    //iniciamos abriendo siempre el archivo
-    std:: ifstream archivo ("inventario.txt");
-    std::cout << "------Listado de productos------" << std::endl;
+    inventario.clear();                      // limpiamos el vector
+    std::ifstream archivo("Inventario.txt"); // creamos el archivo
+    Producto p;                              // llamamos al struct
     if (archivo.is_open())
     {
-        while (archivo >> p.nombre >> p.cantidad_producto>> p.precio_producto)
+        // Llenamos el vector con los archivos existentes en el txt
+        while (archivo >> p.nombre >> p.cantidad_producto >> p.precio_producto)
         {
-            std:: cout << "Nombre: "<< p.nombre<< std:: endl;
-            std:: cout << "Cantidad en stock: "<< p.cantidad_producto<< std:: endl;
-            std:: cout << "Precio por unidad: $"<<p.precio_producto<<std:: endl; 
+            inventario.push_back(p); // hacemos el
         }
-        archivo.close();
-        
-    }else {
-        std:: cout << "No se pudo abrir el archivo"<< std:: endl;
-        system ("cls");
+        archivo.close(); // cerramos el archivo
     }
-    std::cout << "Quieres editar algun producto de el inventario? (Y/N)" << std::endl;
+}
+
+void MostrarProductos()
+{
+    CargarInventario(); // llamamos a el vector
+    system("cls");
+    std::cout << "------Listado de productos------" << std::endl;
+    for (const auto &p : inventario)
+    {
+        std::cout << "---------------------------" << std::endl;
+        std::cout << "Nombre: " << p.nombre << std::endl;
+        std::cout << "Cantidad en stock: " << p.cantidad_producto << std::endl;
+        std::cout << "Precio por unidad: $" << p.precio_producto << std::endl;
+        std::cout << "---------------------------" << std::endl;
+    }
 }
 
 void EliminarProductos()
