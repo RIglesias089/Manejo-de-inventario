@@ -26,6 +26,9 @@ void MosrarProductos();
 void BuscarProductos();
 void EditarProductos();
 
+//Veamos algo nuevo, como sincronizar un archivo txt a mi vector
+void CargarInventario();
+
 
 //Determinamos el vector a utlizar
 std::vector<Producto> inventario;  // vector <Tipo de dato> nombre vector; Usado para el inventario
