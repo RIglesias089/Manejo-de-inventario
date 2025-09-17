@@ -11,7 +11,11 @@
 #include <windows.h>
 #include <cstdlib>
 
+//Libreria para el guardado de datos en txt para que se mantenga existente
+#include <fstream> 
+
 // Declaramos las funciones a utilizar
+struct Producto{};
 void AgregarProducto();
 void EliminarProducto();
 void MosrarProductos();
