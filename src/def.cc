@@ -3,15 +3,14 @@
 
 void AgregarProductos()
 {
-    std::system("cls");
-    // determinamos el struct para guardar los datos
-    Producto p;
+    std::system("cls"); // limpiamos la consola
+    Producto p;         // llamamos el struct
     int n_producto;
-    // Abrimos y creamos el archivo
-    std::ofstream archivo("Inventario.txt", std::ios::app);
-    // Procedemos a preguntar por lo que deseara agregar el usuario
-    std::cout << "Cuantos productos desea agregar?" << std::endl;
+    std::ofstream archivo("Inventario.txt", std::ios::app); // Abrimos los archivos
+
+    std::cout << "Cuantos productos desea agregar?" << std::endl; // pedimos la cantidad de productos a agregar
     std::cin >> n_producto;
+    // Ciclo for para guardar los datos
     for (int i = 0; i < n_producto; i++)
     {
         std::cout << "----------------------------------------------" << std::endl;
@@ -26,19 +25,22 @@ void AgregarProductos()
         std::cin >> p.precio_producto;
         std::system("cls");
 
-        // agregamos los productos al final de el vector
         inventario.push_back(p);
-    }
 
+        // Escribe cada producto en el archivo
+        if (archivo.is_open())
+        {
+            archivo << p.nombre << " " << p.cantidad_producto << " " << p.precio_producto << std::endl;
+        }
+    }
     if (archivo.is_open())
     {
-        archivo << p.nombre << " " << p.cantidad_producto << " " << p.precio_producto << std::endl;
         archivo.close();
     }
 }
 
-// cargamos el inventario siempre
 void CargarInventario()
+// cargamos el inventario siempre
 {
     inventario.clear();                      // limpiamos el vector
     std::ifstream archivo("Inventario.txt"); // creamos el archivo
