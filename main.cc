@@ -18,6 +18,7 @@ int main()
         std::cout << "5. Salir de le programa" << std::endl;
         std::cout << "Que accion deseas realizar?" << std::endl;
         std::cin >> opcion;
+        
         if (opcion = 1)
         {
             AgregarProducto();
