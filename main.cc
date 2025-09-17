@@ -6,11 +6,11 @@ int main()
     // variable para manejar el do while
     int opcion;
 
-    std::cout << "---------------------------------------------------------" << std::endl;
-    std::cout << "Bienvenido a nuestra distribuidora, que deseas realizar?" << std::endl;
-    std::cout << "---------------------------------------------------------" << std::endl;
     do
     {
+        std::cout << "---------------------------------------------------------" << std::endl;
+        std::cout << "Bienvenido a nuestra distribuidora, que deseas realizar?" << std::endl;
+        std::cout << "---------------------------------------------------------" << std::endl;
         std::cout << "1. Agregar un producto" << std::endl;
         std::cout << "2. Mostrar productos existentes" << std::endl;
         std::cout << "3. Buscar producto" << std::endl;
@@ -18,22 +18,22 @@ int main()
         std::cout << "5. Salir de le programa" << std::endl;
         std::cout << "Que accion deseas realizar?" << std::endl;
         std::cin >> opcion;
-        
-        if (opcion = 1)
+
+        if (opcion == 1)
         {
-            AgregarProducto();
+            AgregarProductos();
         }
-        else if (opcion = 2)
+        else if (opcion == 2)
         {
-            MosrarProductos();
+            MostrarProductos();
         }
-        else if (opcion = 3)
+        else if (opcion == 3)
         {
-            BuscarProducto();
+            BuscarProductos();
         }
-        else if (opcion = 4)
+        else if (opcion == 4)
         {
-            EliminarProducto();
+            EliminarProductos();
         }
 
     } while (opcion != 5);

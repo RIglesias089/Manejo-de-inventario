@@ -13,13 +13,20 @@
 
 //Libreria para el guardado de datos en txt para que se mantenga existente
 #include <fstream> 
-
 // Declaramos las funciones a utilizar
-struct Producto{};
-void AgregarProducto();
-void EliminarProducto();
+struct Producto
+{
+    std::string nombre;
+    int cantidad_producto;
+    float precio_producto;
+};
+void AgregarProductos();
+void EliminarProductos();
 void MosrarProductos();
-void BuscarProducto();
-void EditarProducto();
+void BuscarProductos();
+void EditarProductos();
 
+
+//Determinamos el vector a utlizar
+std::vector<Producto> inventario;  // vector <Tipo de dato> nombre vector; Usado para el inventario
 #endif
