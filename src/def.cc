@@ -59,8 +59,9 @@ void CargarInventario()
 void MostrarProductos()
 {
     CargarInventario(); // llamamos a el vector
-    system("cls");
+    system("cls");      // limpiamos la consola
     std::cout << "------Listado de productos------" << std::endl;
+    // Ciclo For para mostrar el inventario
     for (const auto &p : inventario)
     {
         std::cout << "---------------------------" << std::endl;
@@ -73,6 +74,62 @@ void MostrarProductos()
 
 void EliminarProductos()
 {
+    system("cls"); // Limpiamos la consola
+    // Variables de la funcion
+    std::string nombre_eliminar;
+    char confirmacion;
+    // Mostramos los productos existentes
+    MostrarProductos();
+    // Preguntamos el producto que quiere eliminar
+    std::cout << "Que producto quieres eliminar?" << std::endl;
+    std::cin >> nombre_eliminar;
+
+    /* recorremos el vector en busca del producto
+    Primero determinamos la variable it automaticamente, luego usamos find_it que viene
+    de la libreria de algorithm y busca el primer elemento el el rango que determinamos
+    que respectivamente es "inventario.begin()", "inventario.end();" luego usamos una lambda
+    o una funcion anonima, donde [&] significa la lambda puede usar variables externas en referencias
+    y luego (const Producto &p) que refiere a la funcion Producto y todos sus elementos,
+    cerramos con un return que retornara si el nombre del producto coincide con el nombre que
+    el usuario ingreso */
+
+    auto it = std::find_if(
+        inventario.begin(), inventario.end(), [&](const Producto &p)
+        { return p.nombre == nombre_eliminar; });
+
+    // Verificacion de la existencia de el producto
+    if (it != inventario.end()) //verificamos que sea diferente de el final de la funcion
+    {
+        //Mostramos el nombre del producto a eliminar con it-> nombre
+        std::cout << "Producto encontrado: " << it->nombre << ". ¿Seguro que desea eliminarlo? (s/n): ";
+        std::cin >> confirmacion; //guadamos la respuesta
+
+        if (confirmacion == 's' || confirmacion == 'S') //verificamos la respuesta
+        {
+            inventario.erase(it); // Eliminamos del vector
+
+            // Sobrescribe el archivo con el vector actualizado
+            std::ofstream archivo("Inventario.txt", std::ios::trunc);
+            for (const auto &p : inventario)
+            {
+                archivo << p.nombre << " " << p.cantidad_producto << " " << p.precio_producto << std::endl;
+            }
+            archivo.close();
+
+            std::cout << "Producto eliminado correctamente." << std::endl;
+            system("cls");
+        }
+        else
+        {
+            std::cout << "Eliminación cancelada." << std::endl;
+            system("cls");
+        }
+    }
+    else
+    {
+        std::cout << "Producto no encontrado." << std::endl;
+        system("cls");
+    }
 }
 
 void BuscarProductos()
