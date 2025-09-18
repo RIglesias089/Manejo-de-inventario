@@ -25,14 +25,17 @@ int main()
         }
         else if (opcion == 2)
         {
+            CargarInventario();
             MostrarProductos();
         }
         else if (opcion == 3)
         {
+            CargarInventario();
             BuscarProductos();
         }
         else if (opcion == 4)
         {
+            CargarInventario();
             EliminarProductos();
         }
 
