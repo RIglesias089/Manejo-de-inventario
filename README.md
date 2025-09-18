@@ -8,15 +8,14 @@ La empresa necesita un sistema de inventario sencillo en C++ que le permita gest
 El sistema debe permitir:
 -Agregar productos
 -Cada producto debe tener:
--Código único (ID numérico).
 -Nombre.
 -Precio unitario.
 -Cantidad en stock.
 -Mostrar productos
 -Listar todos los productos registrados.
--Mostrar ID, nombre, precio y cantidad.
+-Mostrar nombre, precio y cantidad.
 -Buscar productos
--Buscar por ID o por nombre.
+-Buscar por nombre.
 -Editar productos
 -Cambiar precio o cantidad de un producto existente.
 -Eliminar productos

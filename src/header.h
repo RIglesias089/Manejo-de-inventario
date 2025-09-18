@@ -10,6 +10,8 @@
 #include <random>
 #include <windows.h>
 #include <cstdlib>
+//Llamamos a algorithm para recorrer de manera correcta el vector
+#include <algorithm>
 
 //Libreria para el guardado de datos en txt para que se mantenga existente
 #include <fstream> 
