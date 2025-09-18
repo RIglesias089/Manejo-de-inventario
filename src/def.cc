@@ -58,8 +58,7 @@ void CargarInventario()
 
 void MostrarProductos()
 {
-    CargarInventario(); // llamamos a el vector
-    system("cls");      // limpiamos la consola
+    system("cls"); // limpiamos la consola
     std::cout << "------Listado de productos------" << std::endl;
     // Ciclo For para mostrar el inventario
     for (const auto &p : inventario)
@@ -98,13 +97,13 @@ void EliminarProductos()
         { return p.nombre == nombre_eliminar; });
 
     // Verificacion de la existencia de el producto
-    if (it != inventario.end()) //verificamos que sea diferente de el final de la funcion
+    if (it != inventario.end()) // verificamos que sea diferente de el final de la funcion
     {
-        //Mostramos el nombre del producto a eliminar con it-> nombre
+        // Mostramos el nombre del producto a eliminar con it-> nombre
         std::cout << "Producto encontrado: " << it->nombre << ". ¿Seguro que desea eliminarlo? (s/n): ";
-        std::cin >> confirmacion; //guadamos la respuesta
+        std::cin >> confirmacion; // guadamos la respuesta
 
-        if (confirmacion == 's' || confirmacion == 'S') //verificamos la respuesta
+        if (confirmacion == 's' || confirmacion == 'S') // verificamos la respuesta
         {
             inventario.erase(it); // Eliminamos del vector
 
@@ -134,6 +133,31 @@ void EliminarProductos()
 
 void BuscarProductos()
 {
+    system("cls");
+    std::string nombre_busca;
+    std::cout << "Que producto deseas buscar?" << std::endl;
+    std::cin >> nombre_busca;
+
+    // Recorremos el vector en busqueda de el producto0
+    auto it = std::find_if(
+        inventario.begin(), inventario.end(), [&](const Producto &p)
+        { return p.nombre == nombre_busca; });
+
+    // Si este existe lo mostramos al usuario
+    if (it != inventario.end())
+    {
+        // Mostramos el nombre del producto a eliminar con it-> nombre
+        std::cout << "---------------------------" << std::endl;
+        std::cout << "Producto encontrado: " << "\n"
+                  << it->nombre << "\n"
+                  << it->cantidad_producto << "\n"
+                  << "$" << it->precio_producto << std::endl;
+        std::cout << "---------------------------" << std::endl;
+    }
+    else
+    { // si no existe le decimos que este no a sido encontrado
+        std::cout << "Producto no encontrado" << std::endl;
+    }
 }
 
 void EditarProductos()
