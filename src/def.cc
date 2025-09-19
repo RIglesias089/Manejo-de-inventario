@@ -162,4 +162,49 @@ void BuscarProductos()
 
 void EditarProductos()
 {
+    system ("cls");
+    std::string nombre_editar;
+    char confirmacion;
+    std::cout << "Que producto deseas editar?" << std::endl;
+    std::cin >> nombre_editar;
+    // Recorremos el vector en busqueda de el producto
+    auto it = std::find_if(
+        inventario.begin(), inventario.end(), [&](const Producto &p)
+        { return p.nombre == nombre_editar; });
+    // Si este existe lo mostramos al usuario
+    if (it != inventario.end())
+    {
+        std::cout << "Producto encontrado: " << it->nombre << ". ¿Seguro que desea editarlo? (s/n): ";
+        std::cin >> confirmacion; // guadamos la respuesta
+
+        if (confirmacion == 's' || confirmacion == 'S') // verificamos la respuesta
+        {
+            std::cout << "Nuevo nombre: ";
+            std::cin >> it->nombre;
+            std::cout << "Nueva cantidad: ";
+            std::cin >> it->cantidad_producto;
+            std::cout << "Nuevo precio: ";
+            std::cin >> it->precio_producto;
+
+            // Sobrescribe el archivo con el vector actualizado
+            std::ofstream archivo("Inventario.txt", std::ios::trunc);
+            for (const auto &p : inventario)
+            {
+                archivo << p.nombre << " " << p.cantidad_producto << " " << p.precio_producto << std::endl;
+            }
+            archivo.close();
+
+            std::cout << "Producto editado correctamente." << std::endl;
+            system("cls");
+        }
+        else
+        {
+            std::cout << "Edición cancelada." << std::endl;
+            system("cls");
+        }
+    }
+    else
+    { // si no existe le decimos que este no a sido encontrado
+        std::cout << "Producto no encontrado" << std::endl;
+    }
 }
